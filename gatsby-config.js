@@ -9,15 +9,16 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `Dudeys Blog`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Seokchan Hwang`,
+      summary: `who lives and works in Seoul.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    siteUrl: `https://seokchan-H.github.io`,
     social: {
       twitter: `kylemathews`,
+      linkedin: `https://www.linkedin.com/in/seokchan-hwang-b9680821a`,
     },
   },
   plugins: [
@@ -118,7 +119,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/super-mario.png`, // This path is relative to the root of the site.
       },
     },
   ],
