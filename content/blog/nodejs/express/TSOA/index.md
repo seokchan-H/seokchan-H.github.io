@@ -1,4 +1,5 @@
 ---
+slug: "/nodejs/express/TSOA"
 date: "2024-12-01"
 title: "[Node.js] Express.js 서비스에 TSOA 적용하기"
 tags:
