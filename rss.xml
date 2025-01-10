@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://seokchan-H.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 27 Dec 2024 09:30:23 GMT</lastBuildDate><item><title><![CDATA[[Node.js] Express.js 서비스에 TSOA 적용하기.]]></title><description><![CDATA[새롭게 참여한 팀에서 API 스펙을 공유해달라는 요청을 받았다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://seokchan-H.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 10 Jan 2025 08:26:05 GMT</lastBuildDate><item><title><![CDATA[[Kotlin] Spring Mockk 리셋 이슈]]></title><description><![CDATA[SpringMockk 에서 MockkBean, SpykBean 은 MockkClear 설정에 의해 Mocking 을 Reset 한다.
+SpringMockk 에서 MockkBean, SpykBean 은 MockkClear…]]></description><link>https://seokchan-H.github.io/trouble-shooting/spring-mockk/spykbean-not-reset/</link><guid isPermaLink="false">https://seokchan-H.github.io/trouble-shooting/spring-mockk/spykbean-not-reset/</guid><pubDate>Fri, 10 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;SpringMockk 에서 MockkBean, SpykBean 은 MockkClear 설정에 의해 Mocking 을 Reset 한다.
+SpringMockk 에서 MockkBean, SpykBean 은 MockkClear 의 기본 설정은 MockkClear.AFTER 이다.&lt;/p&gt;
+&lt;p&gt;문제는 이 기능이 AOP 로 래핑된 객체에 대해서 정상작동 하지 않는다는 것이다.
+예를 들어 &lt;code class=&quot;language-text&quot;&gt;@Transactional&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;@Repository&lt;/code&gt; 가 적용된 객체는 테스트시 verify 가 갱신되지 않아 테스트 검증이 실패될 수 있다.&lt;/p&gt;
+&lt;p&gt;해당 이슈는 CGLIB 기반의 프록시 객체에 대해서 발생한다.
+그렇기에 다음과 같이 단순히 객체를 명시적으로 Reset 하면 실패하게 된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre class=&quot;language-kotlin&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;    &lt;span class=&quot;token annotation builtin&quot;&gt;@SpykBean&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;lateinit&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; testClass&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; TestClass
+
+    &lt;span class=&quot;token annotation builtin&quot;&gt;@BeforeEach&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clearSpykBean&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;clearMocks&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;testClass&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/3d9c4b46dea05d558c66d7b7dd02327a/f793b/img.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 14.556962025316455%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAo0lEQVR42j3OSQ6DMAwFUPYtw66oEkOcmQBhUivU+5/r10RVF09Oonzb2UAagQw25eBaQpkXSXW5l6hq1pbpnrOiKHG753g+aizaY+HcxnVnE58z6hWitPiYgLfyiJ1Mdn5/9RorScxE2ISGNQOsH6G0g7cBgSmh/ohlHYevDQ/+dPCUq/E17eR6cmD1M0Y3IYYIbXxqJnkTKQ2aVqDpiIkfwhfe1FRK9BDbjAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;img.png&quot;
+        title=&quot;&quot;
+        src=&quot;/static/3d9c4b46dea05d558c66d7b7dd02327a/f058b/img.png&quot;
+        srcset=&quot;/static/3d9c4b46dea05d558c66d7b7dd02327a/c26ae/img.png 158w,
+/static/3d9c4b46dea05d558c66d7b7dd02327a/6bdcf/img.png 315w,
+/static/3d9c4b46dea05d558c66d7b7dd02327a/f058b/img.png 630w,
+/static/3d9c4b46dea05d558c66d7b7dd02327a/40601/img.png 945w,
+/static/3d9c4b46dea05d558c66d7b7dd02327a/78612/img.png 1260w,
+/static/3d9c4b46dea05d558c66d7b7dd02327a/f793b/img.png 1404w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;해결방법은 AOP 가 Unwrap 된 객체를 기준으로 명시적인 Reset 을 수행하면 된다.
+이를 위해 AopTestUtils 를 사용하면 다음과 같다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre class=&quot;language-kotlin&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;    &lt;span class=&quot;token annotation builtin&quot;&gt;@SpykBean&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;lateinit&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; testClass&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; TestClass
+
+    &lt;span class=&quot;token annotation builtin&quot;&gt;@BeforeEach&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;clearSpykBean&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;clearMocks&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;AopTestUtils&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;getTargetObject&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;TestClass&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;testClass&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 이슈는 &lt;a href=&quot;https://github.com/Ninja-Squad/springmockk/issues/85&quot;&gt;@SpykBean not reset / cleared between tests #85&lt;/a&gt;에서 확인할 수 있다.
+현재 SpringMockk 프로젝트는 2023년 3월 4.0.2 버전을 마지막으로 업데이트 되고 있지 않다.
+하지만 &lt;a href=&quot;https://github.com/Ninja-Squad/springmockk/pull/112&quot;&gt;Migration to mock organization #112&lt;/a&gt; PR 에서 관리팀이 Ninja-Squad 에서 Mockk 로 이관 중임을 확인할 있다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[[Node.js] Express.js 서비스에 TSOA 적용하기.]]></title><description><![CDATA[새롭게 참여한 팀에서 API 스펙을 공유해달라는 요청을 받았다.
 해당 팀은 API 스펙을 Postman 의 Request 로 공유하고 있었다. 내가 볼땐 매번 변경사항이 있을때마다 Request 를 갱신하는 것도 어렵지만,
 Request…]]></description><link>https://seokchan-H.github.io/documentation/express/TSOA/</link><guid isPermaLink="false">https://seokchan-H.github.io/documentation/express/TSOA/</guid><pubDate>Sun, 01 Dec 2024 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;새롭게 참여한 팀에서 API 스펙을 공유해달라는 요청을 받았다.
 해당 팀은 API 스펙을 Postman 의 Request 로 공유하고 있었다.&lt;/p&gt;
