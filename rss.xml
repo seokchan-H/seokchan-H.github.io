@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://seokchan-H.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 22 Feb 2025 07:42:12 GMT</lastBuildDate><item><title><![CDATA[Kotlin JDSL 삽질 일기]]></title><description><![CDATA[Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://seokchan-H.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 22 Feb 2025 08:01:49 GMT</lastBuildDate><item><title><![CDATA[[Kotlin] Kotlin JDSL 삽질 일기]]></title><description><![CDATA[Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
 IDE…]]></description><link>https://seokchan-H.github.io/2025.02.22/</link><guid isPermaLink="false">https://seokchan-H.github.io/2025.02.22/</guid><pubDate>Sat, 22 Feb 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
 IDE 가 추적할 수 없는 코드는 리팩토링이 어렵다.
 그렇기에 최대한 추적 가능한 코드를 만들어야한다.&lt;/p&gt;
@@ -7,28 +7,31 @@ IDE 가 추적할 수 없는 코드는 리팩토링이 어렵다.
 IDE 에서도 사용하지 않는다고 경고를 띄우는 코드였는데, 왜 빌드가 실패했을까?&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 628px; &quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/470f875d9895689db4a9ea1ba01afeec/3d84d/img_1.png&quot;
+    href=&quot;/static/05487141dab593296eb4669c14682ae6/b7756/img_4.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 22.151898734177216%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAvUlEQVR42lWQ5w6DMAyEeaiKUSh7hb1LxFDH+z/DFVsCqT9OtqPz5UuURJQoqv5Qh26Q3FfNyMrLDnU7oe1nrjTfLQ+G6f5V/e4gERWCKIPihwJRUiArWgzTApE3vBjGORtOY5rVLFrWdBs31YRm2CzqKcMLUii08JT7EdIy1bJ9OHzdv+hHyed00TSvB+XIL5HLi0Xky/ZmelV/cLhi2cGV7njxVSmUyGgm2tNjuxHoVXFaso9610+YnL7gB+u/lDhLLYQ7AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 15.18987341772152%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAAsTAAALEwEAmpwYAAAApklEQVR42n2OywqCUBiEe6CgRTcTy4jaRZseJI0KitLjOWoXooJe01bqwo1fx1ZB0Gxm5od/+GpolWVZGUVRcLne2B8EIog4+BLPVwQyZrvzcNw17nLDwlkRRmfSNOX7v1Lt+5DlOdPZnG7PZjCcYFqjT7bsMR2jT7Ntah9Qb7QwTJskef0frAjvj+eHLFAxMjwiZITUuSJWuqvohCcUYawJs+xn8A37OLSfRD2W/wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;img_1.png&quot;
+        alt=&quot;img_4.png&quot;
         title=&quot;&quot;
-        src=&quot;/static/470f875d9895689db4a9ea1ba01afeec/3d84d/img_1.png&quot;
-        srcset=&quot;/static/470f875d9895689db4a9ea1ba01afeec/c26ae/img_1.png 158w,
-/static/470f875d9895689db4a9ea1ba01afeec/6bdcf/img_1.png 315w,
-/static/470f875d9895689db4a9ea1ba01afeec/3d84d/img_1.png 628w&quot;
-        sizes=&quot;(max-width: 628px) 100vw, 628px&quot;
+        src=&quot;/static/05487141dab593296eb4669c14682ae6/f058b/img_4.png&quot;
+        srcset=&quot;/static/05487141dab593296eb4669c14682ae6/c26ae/img_4.png 158w,
+/static/05487141dab593296eb4669c14682ae6/6bdcf/img_4.png 315w,
+/static/05487141dab593296eb4669c14682ae6/f058b/img_4.png 630w,
+/static/05487141dab593296eb4669c14682ae6/40601/img_4.png 945w,
+/static/05487141dab593296eb4669c14682ae6/78612/img_4.png 1260w,
+/static/05487141dab593296eb4669c14682ae6/b7756/img_4.png 2294w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
         decoding=&quot;async&quot;
@@ -113,31 +116,34 @@ DomainResult 는 createResultAssembler 로 자신의 상태에 맞는 DomainResu
 &lt;p&gt;여기서 Argument 는 kdsl 의 selectNew 에서 정의한 Query 의 Column 순서이다.
 이 Query 가 hibernate 의 hq 로 변경된 후 조회되며, 그 결과가 ArgumentReader 에 의해 정의된 순서대로 매핑된다.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;다른 Assembler 도 존재하지만 selectNew 는 기본 구현상 DynamicInstantiationAssemblerConstructorImpl 로 매칭된다.&lt;/p&gt;
+&lt;p&gt;다른 Assembler 도 존재하지만 selectNew 는 기본 구현상으로는 DynamicInstantiationAssemblerConstructorImpl 로 매칭된다.&lt;/p&gt;
+&lt;p&gt;그런데 내가 매칭되는 생성자를 지워버렸으니, 테스트 중에 에러가 발생했던 것이다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/781e4d8f78916d096383a57897632d68/41be6/img_3.png&quot;
+    href=&quot;/static/daa636f0456078be07333c434ced112e/18d85/img_1.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 100.63291139240506%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAErUlEQVR42mWUa2yTVRjHyxY/yicTg34yMXyZDLbRdmu33ta5revo1nbttpY5NhQzN5BB7S7s0t3Huo3LNARFNiRCwGC8hAQ1+sn4CVQQQdAZTIiCQhgbu7b9+bzvthClyb/n5Jz3/M55/uc5jyYen2ZVsdhDaWcgEWd66i5/3pnk/r3bxJcWgCWR0sovNidaVMeW1zxmaBLypyguEwkeMfdomuNnxqgdKKWsy0xVr4OB8WZu3rzM77euMv7JYfo/CDNwoolLV75dgU6xyhHgDKoSMywtzNJzpImC1o34ozn4+k14e7NxdqRTEpL+PitbejfjHsykpF9LWaeJn25cVKFLiw9UjgpcWpqSwQRnL0xQ1JlBcDgPd1s2Ja1GVZ4OE84mPfk7BdJtkbEcgVkpaEmj592wLE0QT8wTE44mpsIWuH//H2r2uyiPmqkYsFEZtREczaV80EpJm5HiUBbmqjS8HWYCIzLeb8PdnkPBm1pCozv4dfKqcOJywsQsC3PTjBzvxt1rIDhiV0G+fguupmxZoMcR1uLuMlIQziDd/wL5jWnYGzeSuzsVf58VZ6see42WazcuoZmbmSJyrBHb7g0EorkEhm24mo0U7cmiqEmHr8fM68N+ynY66HmnhQvffUZdpJrB061MnD+Cf4eL0qoiPjw/zrnzp9Cc/nScwn2bqDqQp4apqKTdSFmrnaNnDnP5ymU8rjKMehOvlNfww/c/cu3n62r29HUNkrU5m00p6UxMTPDb5C9otg94VN+U060ClZArhqzU9nhoHwuxwbwemy+LHG8Gm5wvEog46Dy5iy0NFgzlL6ELrqe6xcudu7fQ+AZNEuZjmKqhZXn7jBQ2p+GO5FDckokznIm324x/yERxu47KYSvenhx6x9/i3oO/5MyLaBTP/gNbAQZEQelvHbZLgpskXczqnLK5otI2k3ppzlYdIxMRYvOzxOIP0VRGrU8ClVs+KDqQi19UKQqMLl9YILqymfS3SvpUH3qZ/LaNfPTFKdVXzROhjkiocst1dQbq643U7jRQHjbi7zVTNmjBs9+CT74pl03KBOoT772RLCKRGhZnH6BRzF8+pVVy0IZHPOn26TnmMXDAlclISSZRr56IX08ooOWNai3ba3RsE71aq2fPNiNd3s0cDdcyPXNPPBy1qOZWDCkemSX7jdTXZlIvi+uCOsJ+Hf2+TAbdOqIu8atYy4hDy2iRjrfdBvY7UuhwZnBrUkmlGBp3KFtAegKKV8PLz8nVlSOhmfBIBigForwzm6CEXdNo4LVdYkeDkYYGHduDqRyL1HPxq3NSD6aXi8Na05cYqpy4QilU9KWL8UZ5p9livkU1XcnJwEE7lYfsVBwSjw/L8xyT+SEXE5+/x8LivFpY4rEV4JpCeCpvinXOs6RW7sWyw4Fzr1FSQotHXpCvPRVvawru5g24w2lkVLgJRU8w/+i2eqvxpYdSa6dYLYOapIIYawoSaPLlyu0CL5jh6cLrPFP8DetcH/O86yTPOd/nWccp1tq/Jsk2RXJegpru6/x99w+1Fq6ebgUISQJMFnByYULgLMP/L2VcokmSb5Kl1RhiGErHuHP7ivpCVkP+F0qU+HPF85y+AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 46.202531645569614%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAABdUlEQVR42pWSzSvDARjH93e4uclJWUxs/DStxbCZFRbNy1DL60FmXtb6eQ1TysGcvOWovMQBFzlI7SCSk5KIbGgL7beP+dlFtvAcnufwfPv0/T49ChJUNPoWa++EQkH8F0fcP14TDgd4CN7IO0l6JVkpfsI+ewwWfsTla8EwmEmdWEzjeDlmTx7HZ3uyTopKfwXKRJZ2ZjG4lVS41ZQ5c6joFagcEKgdKuHk9PCbNilQkiLyPDjZxuhRYRHVdHltWFvNOMVuVjYW0Jk1rK0vJnX5DRiJA+c2Ryn1KLF6i6j26ijr02AczMMynE/DhJH7wPX/HPp2JzGIWdg8hTg6c6l3qrGKAjUjAlWx+H7/flwv/Q04vzWMaSyNZlcu3fZs+ppUuGxK2i3pjNv13F6dxx3+FjnyJXBMn5Fi6kTbU4y2vxB9fz5CRwkzqzO8hm7lL0gUN8ENv6Z7GVJrIcfxhKbtkoL2UzLsAVqnXnh5vosp3kjC4wMobGSG81qVoAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;img
         class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;img_3.png&quot;
+        alt=&quot;img_1.png&quot;
         title=&quot;&quot;
-        src=&quot;/static/781e4d8f78916d096383a57897632d68/f058b/img_3.png&quot;
-        srcset=&quot;/static/781e4d8f78916d096383a57897632d68/c26ae/img_3.png 158w,
-/static/781e4d8f78916d096383a57897632d68/6bdcf/img_3.png 315w,
-/static/781e4d8f78916d096383a57897632d68/f058b/img_3.png 630w,
-/static/781e4d8f78916d096383a57897632d68/41be6/img_3.png 638w&quot;
+        src=&quot;/static/daa636f0456078be07333c434ced112e/f058b/img_1.png&quot;
+        srcset=&quot;/static/daa636f0456078be07333c434ced112e/c26ae/img_1.png 158w,
+/static/daa636f0456078be07333c434ced112e/6bdcf/img_1.png 315w,
+/static/daa636f0456078be07333c434ced112e/f058b/img_1.png 630w,
+/static/daa636f0456078be07333c434ced112e/40601/img_1.png 945w,
+/static/daa636f0456078be07333c434ced112e/78612/img_1.png 1260w,
+/static/daa636f0456078be07333c434ced112e/18d85/img_1.png 2382w&quot;
         sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
         style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
         loading=&quot;lazy&quot;
@@ -145,7 +151,6 @@ DomainResult 는 createResultAssembler 로 자신의 상태에 맞는 DomainResu
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;그런데 내가 매칭되는 생성자를 지워버렸으니, 테스트 중에 에러가 발생했던 것이다.&lt;/p&gt;
 &lt;p&gt;자, 여기까지 이해했다면 내가 원인을 파악하기 위해 프레임워크를 디버깅하는 아주 비생산적인 행위를 했단 것을 알 수 있다.
 이런 일이 없길 바란다면 API 사용자는 최대한 추적가능한 코드를 만들어야 한다.&lt;/p&gt;
 &lt;p&gt;만약 나라면 생성자를 다양화하는 것이 아니라 클래스를 다양화를 선택했을 것 같다.
