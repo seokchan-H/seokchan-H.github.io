@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://seokchan-H.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 22 Feb 2025 08:01:49 GMT</lastBuildDate><item><title><![CDATA[[Kotlin] Kotlin JDSL 삽질 일기]]></title><description><![CDATA[Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://seokchan-H.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 22 Feb 2025 08:08:44 GMT</lastBuildDate><item><title><![CDATA[[Kotlin] Kotlin JDSL 삽질 일기]]></title><description><![CDATA[Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
 IDE…]]></description><link>https://seokchan-H.github.io/2025.02.22/</link><guid isPermaLink="false">https://seokchan-H.github.io/2025.02.22/</guid><pubDate>Sat, 22 Feb 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
 IDE 가 추적할 수 없는 코드는 리팩토링이 어렵다.
 그렇기에 최대한 추적 가능한 코드를 만들어야한다.&lt;/p&gt;
@@ -154,14 +154,7 @@ DomainResult 는 createResultAssembler 로 자신의 상태에 맞는 DomainResu
 &lt;p&gt;자, 여기까지 이해했다면 내가 원인을 파악하기 위해 프레임워크를 디버깅하는 아주 비생산적인 행위를 했단 것을 알 수 있다.
 이런 일이 없길 바란다면 API 사용자는 최대한 추적가능한 코드를 만들어야 한다.&lt;/p&gt;
 &lt;p&gt;만약 나라면 생성자를 다양화하는 것이 아니라 클래스를 다양화를 선택했을 것 같다.
-생성자의 호출부가 없어도 클래스 타입을 지정한 위치를 통해 사용사례를 파악할 수 있지 않을까?&lt;/p&gt;</content:encoded></item><item><title><![CDATA[[Spring] Bean 은 관리대상이다.]]></title><description><![CDATA[우리는 안이 텅 빈 콩깍지(Bean)를 솎아 내야한다. 먹을게 없는걸 구태여 가지고 있을 필요가 없다는 것이다. Spring 의 3대 요소 중 하나인 제어의 역전(IoC…]]></description><link>https://seokchan-H.github.io/code-review/spring-bean/bean-have-to-return/</link><guid isPermaLink="false">https://seokchan-H.github.io/code-review/spring-bean/bean-have-to-return/</guid><pubDate>Fri, 17 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;우리는 안이 텅 빈 콩깍지(Bean)를 솎아 내야한다. 먹을게 없는걸 구태여 가지고 있을 필요가 없다는 것이다.&lt;/p&gt;
-&lt;p&gt;Spring 의 3대 요소 중 하나인 제어의 역전(IoC)은 시스템이 프레임워크에 의해 관리/제어되는 것을 말한다.
-이떄 작성자는 프레임워크의 구성에 필요한 구현체를 의존성 주입(DI)하여 IoC 의 구성요소로 설정하게 된다.
-즉 DI 는 IoC 에서 사용하기 위해 프레임워크 생명주기에 객체를 주입하는 것이다.
-다시 말해 IoC 에서 사용되지 않는 것은 등록할 필요가 없다는 뜻이다.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Void&lt;/li&gt;
-&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[[Kotlin] Spring Mockk 리셋 이슈]]></title><description><![CDATA[컴퓨터는 거짓말을 하지 않는다. 하지만 내가 짠 테스트 코드는 거짓말을 하고 있었다.
+생성자의 호출부가 없어도 클래스 타입을 지정한 위치를 통해 사용사례를 파악할 수 있지 않을까?&lt;/p&gt;</content:encoded></item><item><title><![CDATA[[Kotlin] Spring Mockk 리셋 이슈]]></title><description><![CDATA[컴퓨터는 거짓말을 하지 않는다. 하지만 내가 짠 테스트 코드는 거짓말을 하고 있었다.
 분명 한번만 호출했지만 검증에서 두번 호출되었다고 실패하고 있었다. SpringMockk 에서 MockkBean, SpykBean 은 MockkClear…]]></description><link>https://seokchan-H.github.io/trouble-shooting/spring-mockk/spykbean-not-reset/</link><guid isPermaLink="false">https://seokchan-H.github.io/trouble-shooting/spring-mockk/spykbean-not-reset/</guid><pubDate>Fri, 10 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;컴퓨터는 거짓말을 하지 않는다. 하지만 내가 짠 테스트 코드는 거짓말을 하고 있었다.
 분명 한번만 호출했지만 검증에서 두번 호출되었다고 실패하고 있었다.&lt;/p&gt;
 &lt;p&gt;SpringMockk 에서 MockkBean, SpykBean 은 MockkClear 설정에 의해 Mocking 을 Reset 한다.
