@@ -1,4 +1,162 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://seokchan-H.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 10 Jan 2025 08:31:40 GMT</lastBuildDate><item><title><![CDATA[[Kotlin] Spring Mockk 리셋 이슈]]></title><description><![CDATA[컴퓨터는 거짓말을 하지 않는다. 하지만 내가 짠 테스트 코드는 거짓말을 하고 있었다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://seokchan-H.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 22 Feb 2025 07:42:12 GMT</lastBuildDate><item><title><![CDATA[Kotlin JDSL 삽질 일기]]></title><description><![CDATA[Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
+IDE…]]></description><link>https://seokchan-H.github.io/2025.02.22/</link><guid isPermaLink="false">https://seokchan-H.github.io/2025.02.22/</guid><pubDate>Sat, 22 Feb 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
+IDE 가 추적할 수 없는 코드는 리팩토링이 어렵다.
+그렇기에 최대한 추적 가능한 코드를 만들어야한다.&lt;/p&gt;
+&lt;p&gt;최근 인계받은 프로젝트에서 호출되지 않는 생성자를 여러개 정의한 DTO 들을 발견했다.
+사용하지 않는 코드들은 정리하는 것이 좋기에 이를 제거했더니, 바로 빌드가 실패했다.
+IDE 에서도 사용하지 않는다고 경고를 띄우는 코드였는데, 왜 빌드가 실패했을까?&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 628px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/470f875d9895689db4a9ea1ba01afeec/3d84d/img_1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 22.151898734177216%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAvUlEQVR42lWQ5w6DMAyEeaiKUSh7hb1LxFDH+z/DFVsCqT9OtqPz5UuURJQoqv5Qh26Q3FfNyMrLDnU7oe1nrjTfLQ+G6f5V/e4gERWCKIPihwJRUiArWgzTApE3vBjGORtOY5rVLFrWdBs31YRm2CzqKcMLUii08JT7EdIy1bJ9OHzdv+hHyed00TSvB+XIL5HLi0Xky/ZmelV/cLhi2cGV7njxVSmUyGgm2tNjuxHoVXFaso9610+YnL7gB+u/lDhLLYQ7AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;img_1.png&quot;
+        title=&quot;&quot;
+        src=&quot;/static/470f875d9895689db4a9ea1ba01afeec/3d84d/img_1.png&quot;
+        srcset=&quot;/static/470f875d9895689db4a9ea1ba01afeec/c26ae/img_1.png 158w,
+/static/470f875d9895689db4a9ea1ba01afeec/6bdcf/img_1.png 315w,
+/static/470f875d9895689db4a9ea1ba01afeec/3d84d/img_1.png 628w&quot;
+        sizes=&quot;(max-width: 628px) 100vw, 628px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이유는 Reflection 을 사용하여 동적으로 생성자를 호출하는 코드가 있었기 때문이었다.
+Reflection 을 사용하여 동적으로 생성자를 호출하는 코드는 정적인 코드를 검증하는 IDE 가 추적할 수 없다.&lt;/p&gt;
+&lt;p&gt;문제가 되는 코드를 확인해보니 Kotlin JDSL 를 사용하여 selectNew 로 동적인 DTO 매핑에 사용하고 있었다.
+Kotlin JDSL 의 selectNew 는 Hibernate 의 DomainResult 중 DynamicInstantiationResult 로 지원된다.&lt;/p&gt;
+&lt;p&gt;DomainResult 는 DomainResultAssembler 를 사용하여 ResultSet 을 DTO 로 매핑한다.
+DomainResult 는 createResultAssembler 로 자신의 상태에 맞는 DomainResultAssembler 를 생성한다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/c315860b7d38fed92fac26a21e3ab7ba/599ea/img.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 43.0379746835443%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAABtUlEQVR42lWQ6XLaQBCE9SSpJGADJhjdt/YWBRI6DMhx3v9BOqOVXan8+Gpndnta03KiMEAYeJZ4rn0Pge8iCnxEoQ/3eEAaR9BKwCgJLQWU5DBa2jvJK9vnWWK1znhKcTvFeFxyjHWMhh8xmNDWo4nQChcm24GHa/Bg9Y/PvnS/g3k/oJIddLqFM/Q3jH2Pt3HE0HX0RU6IBcZpIwUlJARj4GUJUZXgRY6KNqqy1MKKgrbVdsYZbn8wDA9iwu3+gWGccO1u6Ps7lD6jrluigTYXmLk+XYnWog3dk4bzGudLb7XO1HKKm2FqS3x0zEZ/NDlOxd5G0OkOKt4sdbL0X3eSqNxvEOEKOt9TbIo8dQaP2bQVaCT9/OwVpjhCZr+g8lcSLr3Oj1DpATLZowqeiLWl9FYQ8Q516Vmtc28lfncSfZ1CkUldupDp3tYqO1iRTF7sEAsXIzab+StL6f2kty3qwrV6Z7pqvLcM753AQKadTmByMiJDe37WkoZEtCGe7TmbstmUDOe3eRE9G46NxNuFYTwvXE1OUY8QyQEi/R8WvaAKNyiDDQpvbcldMg23kPNMesBfZn4yz4x1Xk4AAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;img.png&quot;
+        title=&quot;&quot;
+        src=&quot;/static/c315860b7d38fed92fac26a21e3ab7ba/f058b/img.png&quot;
+        srcset=&quot;/static/c315860b7d38fed92fac26a21e3ab7ba/c26ae/img.png 158w,
+/static/c315860b7d38fed92fac26a21e3ab7ba/6bdcf/img.png 315w,
+/static/c315860b7d38fed92fac26a21e3ab7ba/f058b/img.png 630w,
+/static/c315860b7d38fed92fac26a21e3ab7ba/40601/img.png 945w,
+/static/c315860b7d38fed92fac26a21e3ab7ba/78612/img.png 1260w,
+/static/c315860b7d38fed92fac26a21e3ab7ba/599ea/img.png 1926w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이때 DynamicInstantiationResult 는 Reflection 을 사용하여 지정된 TargetClass 의 모든 생성자를 불러온다.
+그 중 Argument 의 순서와 항목이 일치하는 것이 존재할 때 DynamicInstantiationAssemblerConstructorImpl 를 선택하게 된다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/1b8211f8477d30ca0cab932ed38c07ca/19ab6/img_2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 48.734177215189874%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsTAAALEwEAmpwYAAABaklEQVR42o1SWXaDMBDjHk0CGDDGK2EJS5be/1TqjBPSLX2vHwIPHgtJ48RZj3laMJwuGMYVy/kd40zrjr61M07zFdN6w0yYlmvc55rhwwAXetTKIS9qiFIhybICTlu0oYNvexjXwrkj+nCCsQHtcUD7+N4YD1FIpHQmy0scUoHdPovvDQlvMpxSsKTWEvGxG4loRGgH9MMU60CkjKJSpEY+CX8i4Y39QSBojanrcJ4XLGRtOs1Y1wvW8y0q9WTNWFKpHVm0KMqazuV/EzayxkhqPCksqVlTLSsJWWuUVQOpDN52abTIeEV2t8zSyXIhSmjKSJtwV9FYgiMl6knA0bwi+ZUhq2TkDFHFjDh8tsU1N/6HLBLyg4PmKSpSxCo5K1U3EKR6t8+jupdIv9dPhVVVwxsLvpM8WZ4mW9c0DB4IR8Dgn21rKTVM5VFLE3ssCeJhJYIuZJp+2tmsbVFwxtvV+oqtZ0P26PsA18ciwsAy5eMAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;img_2.png&quot;
+        title=&quot;&quot;
+        src=&quot;/static/1b8211f8477d30ca0cab932ed38c07ca/f058b/img_2.png&quot;
+        srcset=&quot;/static/1b8211f8477d30ca0cab932ed38c07ca/c26ae/img_2.png 158w,
+/static/1b8211f8477d30ca0cab932ed38c07ca/6bdcf/img_2.png 315w,
+/static/1b8211f8477d30ca0cab932ed38c07ca/f058b/img_2.png 630w,
+/static/1b8211f8477d30ca0cab932ed38c07ca/40601/img_2.png 945w,
+/static/1b8211f8477d30ca0cab932ed38c07ca/78612/img_2.png 1260w,
+/static/1b8211f8477d30ca0cab932ed38c07ca/19ab6/img_2.png 1664w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;여기서 Argument 는 kdsl 의 selectNew 에서 정의한 Query 의 Column 순서이다.
+이 Query 가 hibernate 의 hq 로 변경된 후 조회되며, 그 결과가 ArgumentReader 에 의해 정의된 순서대로 매핑된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;다른 Assembler 도 존재하지만 selectNew 는 기본 구현상 DynamicInstantiationAssemblerConstructorImpl 로 매칭된다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/781e4d8f78916d096383a57897632d68/41be6/img_3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 100.63291139240506%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAAErUlEQVR42mWUa2yTVRjHyxY/yicTg34yMXyZDLbRdmu33ta5revo1nbttpY5NhQzN5BB7S7s0t3Huo3LNARFNiRCwGC8hAQ1+sn4CVQQQdAZTIiCQhgbu7b9+bzvthClyb/n5Jz3/M55/uc5jyYen2ZVsdhDaWcgEWd66i5/3pnk/r3bxJcWgCWR0sovNidaVMeW1zxmaBLypyguEwkeMfdomuNnxqgdKKWsy0xVr4OB8WZu3rzM77euMv7JYfo/CDNwoolLV75dgU6xyhHgDKoSMywtzNJzpImC1o34ozn4+k14e7NxdqRTEpL+PitbejfjHsykpF9LWaeJn25cVKFLiw9UjgpcWpqSwQRnL0xQ1JlBcDgPd1s2Ja1GVZ4OE84mPfk7BdJtkbEcgVkpaEmj592wLE0QT8wTE44mpsIWuH//H2r2uyiPmqkYsFEZtREczaV80EpJm5HiUBbmqjS8HWYCIzLeb8PdnkPBm1pCozv4dfKqcOJywsQsC3PTjBzvxt1rIDhiV0G+fguupmxZoMcR1uLuMlIQziDd/wL5jWnYGzeSuzsVf58VZ6see42WazcuoZmbmSJyrBHb7g0EorkEhm24mo0U7cmiqEmHr8fM68N+ynY66HmnhQvffUZdpJrB061MnD+Cf4eL0qoiPjw/zrnzp9Cc/nScwn2bqDqQp4apqKTdSFmrnaNnDnP5ymU8rjKMehOvlNfww/c/cu3n62r29HUNkrU5m00p6UxMTPDb5C9otg94VN+U060ClZArhqzU9nhoHwuxwbwemy+LHG8Gm5wvEog46Dy5iy0NFgzlL6ELrqe6xcudu7fQ+AZNEuZjmKqhZXn7jBQ2p+GO5FDckokznIm324x/yERxu47KYSvenhx6x9/i3oO/5MyLaBTP/gNbAQZEQelvHbZLgpskXczqnLK5otI2k3ppzlYdIxMRYvOzxOIP0VRGrU8ClVs+KDqQi19UKQqMLl9YILqymfS3SvpUH3qZ/LaNfPTFKdVXzROhjkiocst1dQbq643U7jRQHjbi7zVTNmjBs9+CT74pl03KBOoT772RLCKRGhZnH6BRzF8+pVVy0IZHPOn26TnmMXDAlclISSZRr56IX08ooOWNai3ba3RsE71aq2fPNiNd3s0cDdcyPXNPPBy1qOZWDCkemSX7jdTXZlIvi+uCOsJ+Hf2+TAbdOqIu8atYy4hDy2iRjrfdBvY7UuhwZnBrUkmlGBp3KFtAegKKV8PLz8nVlSOhmfBIBigForwzm6CEXdNo4LVdYkeDkYYGHduDqRyL1HPxq3NSD6aXi8Na05cYqpy4QilU9KWL8UZ5p9livkU1XcnJwEE7lYfsVBwSjw/L8xyT+SEXE5+/x8LivFpY4rEV4JpCeCpvinXOs6RW7sWyw4Fzr1FSQotHXpCvPRVvawru5g24w2lkVLgJRU8w/+i2eqvxpYdSa6dYLYOapIIYawoSaPLlyu0CL5jh6cLrPFP8DetcH/O86yTPOd/nWccp1tq/Jsk2RXJegpru6/x99w+1Fq6ebgUISQJMFnByYULgLMP/L2VcokmSb5Kl1RhiGErHuHP7ivpCVkP+F0qU+HPF85y+AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;img_3.png&quot;
+        title=&quot;&quot;
+        src=&quot;/static/781e4d8f78916d096383a57897632d68/f058b/img_3.png&quot;
+        srcset=&quot;/static/781e4d8f78916d096383a57897632d68/c26ae/img_3.png 158w,
+/static/781e4d8f78916d096383a57897632d68/6bdcf/img_3.png 315w,
+/static/781e4d8f78916d096383a57897632d68/f058b/img_3.png 630w,
+/static/781e4d8f78916d096383a57897632d68/41be6/img_3.png 638w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;그런데 내가 매칭되는 생성자를 지워버렸으니, 테스트 중에 에러가 발생했던 것이다.&lt;/p&gt;
+&lt;p&gt;자, 여기까지 이해했다면 내가 원인을 파악하기 위해 프레임워크를 디버깅하는 아주 비생산적인 행위를 했단 것을 알 수 있다.
+이런 일이 없길 바란다면 API 사용자는 최대한 추적가능한 코드를 만들어야 한다.&lt;/p&gt;
+&lt;p&gt;만약 나라면 생성자를 다양화하는 것이 아니라 클래스를 다양화를 선택했을 것 같다.
+생성자의 호출부가 없어도 클래스 타입을 지정한 위치를 통해 사용사례를 파악할 수 있지 않을까?&lt;/p&gt;</content:encoded></item><item><title><![CDATA[[Spring] Bean 은 관리대상이다.]]></title><description><![CDATA[우리는 안이 텅 빈 콩깍지(Bean)를 솎아 내야한다. 먹을게 없는걸 구태여 가지고 있을 필요가 없다는 것이다. Spring 의 3대 요소 중 하나인 제어의 역전(IoC…]]></description><link>https://seokchan-H.github.io/code-review/spring-bean/bean-have-to-return/</link><guid isPermaLink="false">https://seokchan-H.github.io/code-review/spring-bean/bean-have-to-return/</guid><pubDate>Fri, 17 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;우리는 안이 텅 빈 콩깍지(Bean)를 솎아 내야한다. 먹을게 없는걸 구태여 가지고 있을 필요가 없다는 것이다.&lt;/p&gt;
+&lt;p&gt;Spring 의 3대 요소 중 하나인 제어의 역전(IoC)은 시스템이 프레임워크에 의해 관리/제어되는 것을 말한다.
+이떄 작성자는 프레임워크의 구성에 필요한 구현체를 의존성 주입(DI)하여 IoC 의 구성요소로 설정하게 된다.
+즉 DI 는 IoC 에서 사용하기 위해 프레임워크 생명주기에 객체를 주입하는 것이다.
+다시 말해 IoC 에서 사용되지 않는 것은 등록할 필요가 없다는 뜻이다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Void&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[[Kotlin] Spring Mockk 리셋 이슈]]></title><description><![CDATA[컴퓨터는 거짓말을 하지 않는다. 하지만 내가 짠 테스트 코드는 거짓말을 하고 있었다.
 분명 한번만 호출했지만 검증에서 두번 호출되었다고 실패하고 있었다. SpringMockk 에서 MockkBean, SpykBean 은 MockkClear…]]></description><link>https://seokchan-H.github.io/trouble-shooting/spring-mockk/spykbean-not-reset/</link><guid isPermaLink="false">https://seokchan-H.github.io/trouble-shooting/spring-mockk/spykbean-not-reset/</guid><pubDate>Fri, 10 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;컴퓨터는 거짓말을 하지 않는다. 하지만 내가 짠 테스트 코드는 거짓말을 하고 있었다.
 분명 한번만 호출했지만 검증에서 두번 호출되었다고 실패하고 있었다.&lt;/p&gt;
 &lt;p&gt;SpringMockk 에서 MockkBean, SpykBean 은 MockkClear 설정에 의해 Mocking 을 Reset 한다.
