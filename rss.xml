@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://seokchan-H.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 19 Apr 2025 16:45:24 GMT</lastBuildDate><item><title><![CDATA[[PSQL] 트랜잭션 정합성 테스트]]></title><description><![CDATA[…]]></description><link>https://seokchan-H.github.io/2025.04/2025.04.19/</link><guid isPermaLink="false">https://seokchan-H.github.io/2025.04/2025.04.19/</guid><pubDate>Sat, 19 Apr 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;정합성 관련해서 격리수준이나 락에 대한 표준이 있지만 데이터베이스별로 보장하는 수준이 다르다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://seokchan-H.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 20 Apr 2025 03:36:07 GMT</lastBuildDate><item><title><![CDATA[[PSQL] 트랜잭션 정합성 테스트]]></title><description><![CDATA[…]]></description><link>https://seokchan-H.github.io/2025.04/2025.04.19/</link><guid isPermaLink="false">https://seokchan-H.github.io/2025.04/2025.04.19/</guid><pubDate>Sat, 19 Apr 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;정합성 관련해서 격리수준이나 락에 대한 표준이 있지만 데이터베이스별로 보장하는 수준이 다르다.
 표준은 최소 사양을 제시하고 데이터베이스들은 자신들의 기술력에 따라 같은 레벨이여도 더 높은 보장을 할 수 있다.
 이 얘기는 사용하는 데이터베이스에 따라 가장 효율적인 설정방식이 달라진다는 걸 뜻한다.
 이번엔 PSQL 에 대한 정합성 기준을 조사하고 정리해보자.&lt;/p&gt;
@@ -396,7 +396,65 @@ SQL [update simple_entity set created_date=?,sequence=? where id=?]&lt;/li&gt;
 &lt;li&gt;[select ve1_0.id,ve1_0.created_date,ve1_0.sequence,ve1_0.version from versioned_entity ve1_0 where ve1_0.id=? &lt;strong&gt;for no key update nowait&lt;/strong&gt;] [ERROR: could not obtain lock on row in relation &quot;versioned_entity&quot;]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[[Kotlin] Kotlin JDSL 삽질 일기]]></title><description><![CDATA[Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[[PSQL] 락 순차 보장... 할까?]]></title><description><![CDATA[No. 결론부터 말하면 안 한다.
+PSQL 은 공식적으로 명시적인 락에서 FIFO 를 보장하지 않는다.
+(비공식적으로 FIFO 로 동작하지만 예외상황이 존재하기에 신뢰할 수 없다.) 사전 지식 PSQL 의 Lock 은 Tuple…]]></description><link>https://seokchan-H.github.io/2025.04/2025.04.20/</link><guid isPermaLink="false">https://seokchan-H.github.io/2025.04/2025.04.20/</guid><pubDate>Sat, 19 Apr 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;No. 결론부터 말하면 안 한다.
+PSQL 은 공식적으로 명시적인 락에서 FIFO 를 보장하지 않는다.
+(비공식적으로 FIFO 로 동작하지만 예외상황이 존재하기에 신뢰할 수 없다.)&lt;/p&gt;
+&lt;h2&gt;사전 지식&lt;/h2&gt;
+&lt;p&gt;PSQL 의 Lock 은 Tuple 를 기반으로 동작한다.
+PSQL 은 데이터 수정시 새로운 Tuple 을 생성한다.
+만약 대기중인 Lock 들이 있다면 기존 Tuple 에 대한 점유를 포기하고
+신규 Tuple 에 대한 Lock 을 대기한다.&lt;/p&gt;
+&lt;h2&gt;PSQL Community 조사&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PSQL Community 에서는 Email 소통을 아카이빙하여 공유하고 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;details open&gt;
+&lt;summary&gt;&lt;a href=&quot;https://www.postgresql.org/message-id/flat/CANW1aT_Pc%2BxdoN_D-dK%2Bj3uE%2BD_2wfFZu26aAfprWsoGhoNu-A%40mail.gmail.com&quot;&gt;Are advisory locks guaranteed to be First Come First Serve? And can the behavior be relied upon?&lt;/a&gt;&lt;/summary&gt;
+&lt;blockquote&gt;
+&lt;p&gt;기본적으로 FIFO 방식으로 동작한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Yes - lock requests that block are queued, with later lock requests queued behind previous
+ones.  Once a lock gets free, the first in line gets it.
+
+This is the same for all heavyweight locks in PostgreSQL.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;하지만 DeadLock 을 피하기 위해서 순서를 바꾸는 등의 예외는 존재한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;There is an exception: the queue order will be rearranged if we find
+that doing so is necessary to avoid a deadlock failure. 
+See src/backend/storage/lmgr/README&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/details&gt;
+&lt;details open&gt;
+&lt;summary&gt;&lt;a href=&quot;https://www.postgresql.org/message-id/flat/TYAPR01MB607370A5022B8854EFDC1BA58AAD9%40TYAPR01MB6073.jpnprd01.prod.outlook.com&quot;&gt;The order of queues in row lock is changed (not FIFO)&lt;/a&gt;&lt;/summary&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Row 락 기반으로 업데이트 처리하는 트랜잭션을 여러개 수행한 테스트이다.
+수정시 신규 TID 에 락이 재정렬하게되고 이때 FIFO 가 보장되지 않는 내용이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;I don&apos;t see a bug here, or at least I&apos;m not willing to move the
+goalposts to where you want them to be.  I believe that we do guarantee
+arrival-order locking of individual tuple versions.  However, in the
+example you show, a single row is being updated over and over.  So,
+initially we have a single &quot;winner&quot; transaction that got the tuple lock
+first and updated the row.  When it commits, each other transaction
+serially comes off the wait queue for that tuple lock and discovers
+that it now needs a lock on a different tuple version than it has got.
+So it tries to get lock on whichever is the latest tuple version.
+That might still appear serial as far as the original 100 sessions
+go, because they were all queued on the same tuple lock to start with.
+But when the new sessions come in, they effectively line-jump because
+they will initially try to lock whichever tuple version is committed
+live at that instant, and thus they get ahead of whichever remain of
+the original 100 sessions for the lock on that tuple version (since
+those are all still blocked on some older tuple version, whose lock is
+held by whichever session is performing the next-to-commit update).
+
+I don&apos;t see any way to make that more stable that doesn&apos;t involve
+requiring sessions to take locks on already-dead-to-them tuples;
+which sure seems like a nonstarter, not least because we don&apos;t even have
+a way to find such tuples.  The update chains only link forward not back.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/details&gt;</content:encoded></item><item><title><![CDATA[[Kotlin] Kotlin JDSL 삽질 일기]]></title><description><![CDATA[Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
 IDE…]]></description><link>https://seokchan-H.github.io/2025.02/2025.02.22/</link><guid isPermaLink="false">https://seokchan-H.github.io/2025.02/2025.02.22/</guid><pubDate>Sat, 22 Feb 2025 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Reflection 을 이용한 동적인 호출은 IDE 에서 호출 시점을 추적할 수 없다.
 IDE 가 추적할 수 없는 코드는 리팩토링이 어렵다.
 그렇기에 최대한 추적 가능한 코드를 만들어야한다.&lt;/p&gt;
